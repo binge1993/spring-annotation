@@ -1,7 +1,11 @@
 package com.binge.annotation;
 
+import java.util.Map;
+
+import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.core.env.Environment;
 
 import com.binge.annotation.bean.Person;
 import com.binge.annotation.config.MainConfig;
@@ -14,14 +18,32 @@ import com.binge.annotation.config.MainConfig;
 
 public class IOCTest {
 
-	public static void main(String[] args) {
-		ApplicationContext context = new AnnotationConfigApplicationContext(MainConfig.class);
+	private ApplicationContext context = new AnnotationConfigApplicationContext(MainConfig.class);
 
-		for (String beanName : context.getBeanDefinitionNames()) {
-			System.out.println(beanName);
+	@Test
+	public void testImport() {
+		printBeanNames();
+	}
+
+	private void printBeanNames() {
+		String[] beanDefinitionNames = context.getBeanDefinitionNames();
+		for (String name : beanDefinitionNames) {
+			System.out.println(name);
+		}
+	}
+
+	@Test
+	public void test() {
+		Environment environment = context.getEnvironment();
+		String osName = environment.getProperty("os.name");
+		System.out.println("osName:" + osName);
+
+		String[] beanNamesForType = context.getBeanNamesForType(Person.class);
+		for (String name : beanNamesForType) {
+			System.out.println(name);
 		}
 
-		Person person = context.getBean(Person.class);
-		System.out.println(person);
+		Map<String, Person> persons = context.getBeansOfType(Person.class);
+		System.out.println(persons);
 	}
 }
