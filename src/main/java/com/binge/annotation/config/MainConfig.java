@@ -13,6 +13,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.binge.annotation.bean.Color;
+import com.binge.annotation.bean.ColorFactoryBean;
 import com.binge.annotation.bean.Person;
 import com.binge.annotation.bean.Red;
 import com.binge.annotation.condition.LinuxCondition;
@@ -26,7 +27,7 @@ import com.binge.annotation.condition.WindowsCondition;
  */
 @Configuration
 @ComponentScan(value = "com.binge", useDefaultFilters = false, excludeFilters = {
-        @Filter(type = FilterType.ANNOTATION, classes = { Controller.class }) })
+		@Filter(type = FilterType.ANNOTATION, classes = { Controller.class }) })
 @Import({ Color.class, Red.class, MyImportSelector.class })
 public class MainConfig {
 
@@ -53,5 +54,10 @@ public class MainConfig {
 	@Bean("linus")
 	public Person person02() {
 		return new Person("linus", 58);
+	}
+
+	@Bean
+	public ColorFactoryBean colorFactoryBean() {
+		return new ColorFactoryBean();
 	}
 }

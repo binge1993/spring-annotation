@@ -21,6 +21,14 @@ public class IOCTest {
 	private ApplicationContext context = new AnnotationConfigApplicationContext(MainConfig.class);
 
 	@Test
+	public void testFactoryBean() {
+		Object bean = context.getBean("colorFactoryBean");
+		Object bean1 = context.getBean("&colorFactoryBean");
+		System.out.println(bean.getClass());
+		System.out.println(bean1.getClass());
+	}
+	
+	@Test
 	public void testImport() {
 		printBeanNames();
 	}
