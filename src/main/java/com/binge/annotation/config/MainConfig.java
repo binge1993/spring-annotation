@@ -26,8 +26,7 @@ import com.binge.annotation.condition.WindowsCondition;
  * @date 2018年7月24日
  */
 @Configuration
-@ComponentScan(value = "com.binge", useDefaultFilters = false, excludeFilters = {
-		@Filter(type = FilterType.ANNOTATION, classes = { Controller.class }) })
+@ComponentScan(value = "com.binge")
 @Import({ Color.class, Red.class, MyImportSelector.class })
 public class MainConfig {
 
